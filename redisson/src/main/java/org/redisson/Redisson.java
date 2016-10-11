@@ -225,6 +225,20 @@ public class Redisson implements RedissonClient {
     }
 
     @Override
+    public <V> RSet<V> getLinkedSet(String name) {
+        RSet<V> set = new RedissonSet<V>(commandExecutor, name);
+        set.addAll(new RedissonMap<V, Boolean>(commandExecutor, name).keySet());
+        return set;
+    }
+
+    @Override
+    public <V> RSet<V> getLinkedSet(String name, Codec codec) {
+        RSet<V> set = new RedissonSet<V>(codec, commandExecutor, name);
+        set.addAll(new RedissonMap<V, Boolean>(codec, commandExecutor, name).keySet());
+        return set;
+    }
+
+    @Override
     public <K, V> RListMultimap<K, V> getListMultimap(String name) {
         return new RedissonListMultimap<K, V>(commandExecutor, name);
     }

@@ -181,6 +181,26 @@ public interface RedissonClient {
     <V> RList<V> getList(String name, Codec codec);
 
     /**
+     * Returns linked set (preserves insertion order) instance by name.
+     *
+     * @param <V> type of value
+     * @param name - name of object
+     * @return Set object
+     */
+    <V> RSet<V> getLinkedSet(String name);
+
+    /**
+     * Returns linked set (preserves insertion order) instance by name
+     * using provided codec for list objects.
+     *
+     * @param <V> type of value
+     * @param name - name of object
+     * @param codec - codec for values
+     * @return Set object
+     */
+    <V> RSet <V> getLinkedSet(String name, Codec codec);
+
+    /**
      * Returns List based Multimap instance by name.
      * 
      * @param <K> type of key
